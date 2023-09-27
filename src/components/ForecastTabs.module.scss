@@ -1,0 +1,31 @@
+@import "../styles/constants";
+
+.timeForecast {
+  display: block;
+  height: 180px;
+  background-image: url("../assets/images/line_shadow.svg");
+  background-position-y: -80px;
+  background-repeat: no-repeat;
+  padding: $paddingSection;
+  &Button {
+    background-color: transparent;
+    border: 0;
+    font-size: 1rem;
+    font-weight: bold;
+    text-shadow: $text-shadow;
+    cursor: pointer;
+    &Inactive {
+      font-size: .9rem;
+      font-weight: normal;
+      color: $inactive-text-color;
+    }
+  }
+  &Button:hover {
+    text-decoration: underline;
+  }
+
+  &Items {
+    display: flex;
+    justify-content: center;
+  }
+}

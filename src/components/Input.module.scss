@@ -1,0 +1,15 @@
+.wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.btnLocation {
+  width: 20px;
+  height: 20px;
+  background-image: url('../assets/images/location.png');
+  background-position: center;
+  background-size: contain;
+  background-color: transparent;
+  border: 0;
+  cursor: pointer;
+}

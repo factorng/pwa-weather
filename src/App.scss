@@ -1,0 +1,13 @@
+
+@import "./styles/fonts";
+@import "./styles/constants";
+.App {
+  margin: 0 auto;
+  max-width: 400px;
+  background-color: $bg-color;
+  font-family: $font-family-main;
+  min-height: 100vh;
+  box-sizing: border-box;
+  position: relative;
+}
+

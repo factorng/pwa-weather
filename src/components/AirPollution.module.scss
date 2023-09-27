@@ -1,0 +1,33 @@
+@import "../styles/constants";
+.wrapper {
+  display: block;
+  padding: $paddingSection;
+}
+.header {
+  font-size: 1rem;
+  font-weight: bold;
+}
+.items {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.item {
+  text-shadow: $text-shadow;
+  &Data {
+    padding: 0 .4rem;
+    font-weight: bold;
+    text-shadow: $no-text-shadow;
+
+    &ColorRed {
+      color: red;
+    }
+    &ColorGreen {
+      color: green;
+    }
+    &ColorYellow {
+      color: #D5B85A;
+    }
+  }
+
+}
