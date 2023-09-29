@@ -1,12 +1,13 @@
-import React from "react";
-import { ApiWeatherNow, CityList } from "../types/api-types";
+import React, { useState, useEffect } from "react";
+import { getCityWeaterById } from "../utils/api";
+import { ApiWeatherNow, CityList, ApiErrorMessage } from "../types/api-types";
 import styles from "./DetailedDayForecast.module.scss";
 import useImage from "../hooks/useImage";
 import Input from "./Input";
 import Preloader from "./Preloader";
 
 type DetailedDayForecastProps = {
-  apiData: ApiWeatherNow | undefined;
+  cityId: number;
   onInput: (input: string) => any;
   searchHints: CityList;
   onHintClick: (id: number) => void;
@@ -14,9 +15,33 @@ type DetailedDayForecastProps = {
 };
 
 const DetailedDayForecast = (props: DetailedDayForecastProps) => {
-  const { apiData, onInput, searchHints, onHintClick, handleLocationClick } =
+  const { cityId, onInput, searchHints, onHintClick, handleLocationClick } =
     props;
+
+  const [apiData, setApiData] = useState<ApiWeatherNow | undefined>();
+  const [errorMessage, setErrorMessage] = useState<ApiErrorMessage | undefined>(
+    undefined
+  );
   const { image } = useImage(apiData?.weather[0].icon);
+
+  useEffect(() => {
+    async function fetchData() {
+      const detailedForecast = await getCityWeaterById(cityId);
+
+      if ("errorMessage" in detailedForecast) {
+        setErrorMessage(detailedForecast);
+        return;
+      } else {
+        setApiData(detailedForecast);
+      }
+    }
+
+    cityId && fetchData();
+  }, [cityId]);
+
+  useEffect(() => {
+    errorMessage && alert(errorMessage);
+  }, [errorMessage]);
 
   return apiData ? (
     <div className={styles.wrapper}>

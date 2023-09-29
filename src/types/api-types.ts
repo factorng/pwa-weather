@@ -78,7 +78,7 @@ export type DailyForecastByPeriods =
       night: ApiWeatherPeriod;
     }
   | undefined;
-export type Coordinates = { lat: number; lon: number };
+export type Coordinates = { lat: number; lon: number } | undefined;
 export type CityListItem = {
   id: number;
   name: string;

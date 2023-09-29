@@ -2,10 +2,11 @@
 
 .SearchHints {
   position: absolute;
-  background-color: $bg-hits;
+  background-color: $bg-accent;
   width: 280px;
   padding: 1rem;
   box-sizing: border-box;
+  top: 30px;
 }
 .SearchHint {
   text-decoration: none;
