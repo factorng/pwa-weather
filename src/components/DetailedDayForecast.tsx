@@ -40,7 +40,7 @@ const DetailedDayForecast = (props: DetailedDayForecastProps) => {
   }, [cityId]);
 
   useEffect(() => {
-    errorMessage && alert(errorMessage);
+    errorMessage && alert(errorMessage.errorMessage);
   }, [errorMessage]);
 
   return apiData ? (

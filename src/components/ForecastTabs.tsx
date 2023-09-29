@@ -9,6 +9,7 @@ import {
 import styles from "./ForecastTabs.module.scss";
 import ForecastTab from "./ForecastTab";
 import { getCityForecastById } from "../utils/api";
+import Preloader from "./Preloader";
 
 type ForecastTabsProps = {
   cityId: number;
@@ -38,7 +39,10 @@ const ForecastTabs = (props: ForecastTabsProps) => {
     cityId && fetchData();
   }, [cityId]);
 
-  useEffect(() => errorMessage && alert(errorMessage), [errorMessage]);
+  useEffect(
+    () => errorMessage && alert(errorMessage.errorMessage),
+    [errorMessage]
+  );
 
   useEffect(() => {
     const todayForecast = apiData?.list.filter((day) => {
@@ -71,8 +75,10 @@ const ForecastTabs = (props: ForecastTabsProps) => {
           Tomorrow
         </button>
       </div>
-      {todayForecast && (
+      {todayForecast ? (
         <ForecastTab dayToggle={dayToggle} todayForecast={todayForecast} />
+      ) : (
+        <Preloader />
       )}
     </div>
   );

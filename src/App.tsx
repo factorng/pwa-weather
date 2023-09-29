@@ -30,7 +30,7 @@ function App() {
   function handleLocationClick() {
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition(getCityIdByGeolocation, () =>
-        setErrorMessage("error geo api")
+        setErrorMessage("Turn on geolocation in your browser")
       );
     } else {
       setErrorMessage("Geolocation not supported");

@@ -34,7 +34,7 @@ const AirPollution = (props: AirPollutionProps) => {
   }, [cityCoords]);
 
   useEffect(() => {
-    errorMessage && alert(errorMessage);
+    errorMessage && alert(errorMessage.errorMessage);
   }, [errorMessage]);
 
   return fetchedData ? (
