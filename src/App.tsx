@@ -61,6 +61,7 @@ function App() {
   };
 
   useEffect(() => {
+    //find city coords by id for air pollution
     const cityById = cityList.find((city: CityListItem) => city.id === cityId);
     cityById && setCityCoords(cityById.coord);
   }, [cityId, cityList]);

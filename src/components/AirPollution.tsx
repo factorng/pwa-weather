@@ -91,4 +91,4 @@ const AirPollution = (props: AirPollutionProps) => {
   );
 };
 
-export default AirPollution;
+export default React.memo(AirPollution);

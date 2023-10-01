@@ -23,10 +23,11 @@ const ForecastTabs = (props: ForecastTabsProps) => {
   const [errorMessage, setErrorMessage] = useState<ApiErrorMessage | undefined>(
     undefined
   );
-
-  const todayDate = useMemo(() => new Date(), []);
-  const tommDate = useMemo(() => new Date(), []);
-  tommDate.setDate(new Date().getDate() + 1);
+  const [todayDate] = useState<Date>(new Date());
+  const [tommDate] = useState<Date>(() => {
+    let currentDate = new Date();
+    return new Date(currentDate.setDate(currentDate.getDate() + 1));
+  });
 
   useEffect(() => {
     async function fetchData() {
@@ -55,7 +56,7 @@ const ForecastTabs = (props: ForecastTabsProps) => {
       }
     });
     setTodayForecast(todayForecast);
-  }, [apiData, dayToggle, todayDate, tommDate, cityId]);
+  }, [apiData, dayToggle, cityId, todayDate, tommDate]);
 
   return (
     <div className={styles.timeForecast}>
@@ -84,4 +85,4 @@ const ForecastTabs = (props: ForecastTabsProps) => {
   );
 };
 
-export default ForecastTabs;
+export default React.memo(ForecastTabs);

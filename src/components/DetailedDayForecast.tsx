@@ -89,4 +89,4 @@ const DetailedDayForecast = (props: DetailedDayForecastProps) => {
   );
 };
 
-export default DetailedDayForecast;
+export default React.memo(DetailedDayForecast);
