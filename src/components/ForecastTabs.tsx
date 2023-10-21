@@ -1,50 +1,26 @@
-import React, { useEffect, useState, useMemo } from "react";
+import React, { useEffect, useState } from "react";
 import classNames from "classnames";
 import {
   ApiWeatherForecast,
   ApiWeatherPeriod,
+  DailyForecastByPeriods,
   ForecastDay,
-  ApiErrorMessage,
 } from "../types/api-types";
 import styles from "./ForecastTabs.module.scss";
 import ForecastTab from "./ForecastTab";
-import { getCityForecastById } from "../utils/api";
-import Preloader from "./Preloader";
 
 type ForecastTabsProps = {
-  cityId: number;
+  apiData: ApiWeatherForecast | undefined;
 };
 
 const ForecastTabs = (props: ForecastTabsProps) => {
-  const { cityId } = props;
+  const { apiData } = props;
   const [dayToggle, setDayToggle] = useState<ForecastDay>("today");
   const [todayForecast, setTodayForecast] = useState<Array<ApiWeatherPeriod>>();
-  const [apiData, setApiData] = useState<ApiWeatherForecast | undefined>();
-  const [errorMessage, setErrorMessage] = useState<ApiErrorMessage | undefined>(
-    undefined
-  );
-  const [todayDate] = useState<Date>(new Date());
-  const [tommDate] = useState<Date>(() => {
-    let currentDate = new Date();
-    return new Date(currentDate.setDate(currentDate.getDate() + 1));
-  });
 
-  useEffect(() => {
-    async function fetchData() {
-      const timeForecast = await getCityForecastById(cityId);
-      if ("errorMessage" in timeForecast) {
-        setErrorMessage(timeForecast);
-        return;
-      } else setApiData(timeForecast);
-    }
-    cityId && fetchData();
-  }, [cityId]);
-
-  useEffect(
-    () => errorMessage && alert(errorMessage.errorMessage),
-    [errorMessage]
-  );
-
+  const todayDate = new Date();
+  const tommDate = new Date();
+  tommDate.setDate(new Date().getDate() + 1);
   useEffect(() => {
     const todayForecast = apiData?.list.filter((day) => {
       day.dt_txt = day.dt_txt.replace(" ", "T");
@@ -56,33 +32,33 @@ const ForecastTabs = (props: ForecastTabsProps) => {
       }
     });
     setTodayForecast(todayForecast);
-  }, [apiData, dayToggle, cityId, todayDate, tommDate]);
+  }, [apiData, dayToggle]);
 
   return (
-    <div className={styles.timeForecast}>
-      <div>
-        <button
-          onClick={() => setDayToggle("today")}
-          className={classNames(styles.timeForecastButton, {
-            [styles.timeForecastButtonInactive]: dayToggle !== "today",
-          })}>
-          Today
-        </button>
-        <button
-          onClick={() => setDayToggle("tomorrow")}
-          className={classNames(styles.timeForecastButton, {
-            [styles.timeForecastButtonInactive]: dayToggle !== "tomorrow",
-          })}>
-          Tomorrow
-        </button>
+    <>
+      <div className={styles.timeForecast}>
+        <div>
+          <button
+            onClick={() => setDayToggle("today")}
+            className={classNames(styles.timeForecastButton, {
+              [styles.timeForecastButtonInactive]: dayToggle !== "today",
+            })}>
+            Today
+          </button>
+          <button
+            onClick={() => setDayToggle("tomorrow")}
+            className={classNames(styles.timeForecastButton, {
+              [styles.timeForecastButtonInactive]: dayToggle !== "tomorrow",
+            })}>
+            Tomorrow
+          </button>
+        </div>
+        {todayForecast && (
+          <ForecastTab dayToggle={dayToggle} todayForecast={todayForecast} />
+        )}
       </div>
-      {todayForecast ? (
-        <ForecastTab dayToggle={dayToggle} todayForecast={todayForecast} />
-      ) : (
-        <Preloader />
-      )}
-    </div>
+    </>
   );
 };
 
-export default React.memo(ForecastTabs);
+export default ForecastTabs;

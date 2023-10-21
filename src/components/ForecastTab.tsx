@@ -17,9 +17,6 @@ const ForecastTab = (props: ForecastTabProps) => {
   const { dayToggle, todayForecast } = props;
   const [dailyForecastByPeriods, setDailyForecastByPeriods] =
     useState<DailyForecastByPeriods>();
-  const todayDate = new Date();
-  const tommDate = new Date();
-  tommDate.setDate(new Date().getDate() + 1);
   useEffect(() => {
     const forecastByPeriods: DailyForecastByPeriods = todayForecast?.reduce(
       (acc, el) => {

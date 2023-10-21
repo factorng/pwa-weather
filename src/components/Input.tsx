@@ -9,26 +9,14 @@ type InputProps = {
   onInputChangeHanlder: (input: string) => void;
   hints: CityList;
   onHintClick: (id: number) => void;
-  handleLocationClick: () => void;
 };
 
 const Input: React.FC<InputProps> = (props) => {
-  const {
-    value,
-    onInputChangeHanlder,
-    hints,
-    onHintClick,
-    handleLocationClick,
-  } = props;
+  const { value, onInputChangeHanlder, hints, onHintClick } = props;
   return (
-    <div className={styles.wrapper}>
+    <div className={styles.Input}>
       <InputField value={value} onInputChangeHanlder={onInputChangeHanlder} />
       <SearchHints hints={hints} onHintClick={onHintClick} />
-      <button
-        className={styles.btnLocation}
-        onClick={handleLocationClick}
-        name="geoposition"
-      />
     </div>
   );
 };

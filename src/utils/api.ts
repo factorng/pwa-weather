@@ -1,6 +1,7 @@
 import {
   ApiWeatherNow,
   ApiError,
+  WeatherData,
   ApiWeatherForecast,
   ApiErrorMessage,
   ApiAirPollution,
@@ -51,16 +52,3 @@ export async function getCityPollutionById(
     return { errorMessage: "unknown error" };
   }
 }
-
-export async function getCityWeatherByCoords(position: GeolocationPosition) {
-    try {
-      const response = await fetch(
-        `https://api.openweathermap.org/data/2.5/forecast?lat=${position.coords.latitude}&lon=${position.coords.longitude}&units=metric&appid=${process.env.REACT_APP_API_KEY}`
-      );
-      const data = await response.json();
-      return data;
-    } catch (e: unknown) {
-      return { errorMessage: "unknown error" };
-    }
-}
-//{ cod: "400", message: "wrong latitude" }

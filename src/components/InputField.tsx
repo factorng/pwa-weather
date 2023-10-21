@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useRef } from "react";
+import React, { useEffect, useState } from "react";
 import styles from "./InputField.module.scss";
 import useDebounce from "../hooks/useDebounce";
 
@@ -10,38 +10,25 @@ type InputProps = {
 export const InputField = (props: InputProps) => {
   const { value, onInputChangeHanlder } = props;
   const [inputValue, setInputValue] = useState(value);
-  const inputDebounced = useDebounce(inputValue, 500);
-  const inputRef = useRef<HTMLInputElement>(null);
+  const inputDebounsed = useDebounce(inputValue, 500);
 
   const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { value } = e.target;
     setInputValue(value);
   };
-  const handleClearInput = () => {
-    setInputValue("");
-    onInputChangeHanlder("");
-    inputRef?.current?.focus();
-  };
-  useEffect(() => {
-    onInputChangeHanlder(inputDebounced);
-  }, [inputDebounced]);
 
-  useEffect(() => setInputValue(value), [value]);
+  useEffect(() => {
+    onInputChangeHanlder(inputDebounsed);
+  }, [inputDebounsed]);
 
   return (
-    <>
-      <input
-        type="text"
-        data-testid="input"
-        value={inputValue}
-        onChange={onChange}
-        className={styles.input}
-        ref={inputRef}
-      />
-      <button onClick={handleClearInput} className={styles.button}>
-        x
-      </button>
-    </>
+    <input
+      type="text"
+      data-testid="input"
+      value={inputValue}
+      onChange={onChange}
+      className={styles.input}
+    />
   );
 };
 

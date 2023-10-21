@@ -2,7 +2,6 @@ import React from "react";
 import { render, screen, fireEvent, cleanup } from "@testing-library/react";
 import "@testing-library/jest-dom";
 import SearchHints from "./SearchHints";
-import { CityList } from "../types/api-types";
 
 const MOCKED_DATA_HINTS = new Array(10).fill({}).map(
   (obj, i) =>

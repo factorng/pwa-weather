@@ -21,7 +21,6 @@ describe("Input", () => {
         onInputChangeHanlder={() => null}
         hints={MOCKED_DATA_HINTS}
         onHintClick={() => null}
-        handleLocationClick={() => null}
       />
     );
     render(app);
@@ -31,5 +30,8 @@ describe("Input", () => {
   });
   it("should render hints  component", () => {
     expect(screen.getByTestId("hints"));
+  });
+  it("should render cities names on hints", () => {
+    expect(screen.getAllByText("test city").length).toBe(6);
   });
 });
