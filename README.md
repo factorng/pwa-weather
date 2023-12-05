@@ -2,7 +2,7 @@
 
 ## Technologies
 
-React, ccs modules, scss, TypeScript, React Testing Tibrary, Jest
+React, ccs modules, scss, TypeScript, React Testing Tibrary, Jest, Workbox
 
 ### Features
 
@@ -22,7 +22,7 @@ React, ccs modules, scss, TypeScript, React Testing Tibrary, Jest
 ## Функциональные возможности
 
 - Подробная информация о погоде на текущий момент
-- Пргоноз погоды на сегодня и на завтра
+- Прогоноз погоды на сегодня и на завтра
 - Информация о загрязнении воздуха
 - Определение местоположения с помощью Geolocation API
 - Всплывающая подсказка об установке для устройств на IOS

@@ -18,7 +18,6 @@ import DetailedDayForecast from "./components/DetailedDayForecast";
 import ForecastTabs from "./components/ForecastTabs";
 import AirPollution from "./components/AirPollution";
 import data from "./assets/city.json";
-import Preloader from "./components/Preloader";
 
 function App() {
   const cityList: CityList = Array.from(data);
