@@ -1,0 +1,21 @@
+@import '../../styles/constants.scss';
+.popup {
+  background-color: $accent-color;
+  height: 14vh;
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  width: $app-width;
+  margin: 0 auto;
+  padding: 1rem;
+  box-sizing: border-box;
+}
+.buttonClose{
+    position: absolute;
+    right: 4px;
+    top: 4px;
+    border-radius: 50%;
+    border: 0;
+    background-color: white;
+}
