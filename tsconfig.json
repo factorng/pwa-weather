@@ -21,7 +21,7 @@
     "allowUnusedLabels": true,
     "noImplicitAny": false,
     "noImplicitReturns": true,
-    "resolveJsonModule": false,
+    "resolveJsonModule": true,
     "declaration": true,
   },
   "include": [

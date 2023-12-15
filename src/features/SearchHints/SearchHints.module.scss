@@ -1,0 +1,17 @@
+@import "../../shared/styles/constants";
+
+.SearchHints {
+  position: absolute;
+  background-color: $bg-hits;
+  width: 280px;
+  padding: 1rem;
+  box-sizing: border-box;
+}
+.SearchHint {
+  text-decoration: none;
+  cursor: pointer;
+}
+.SearchHint:hover {
+  text-decoration: underline;
+  font-weight: bold;
+}
