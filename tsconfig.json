@@ -21,11 +21,11 @@
     "allowUnusedLabels": true,
     "noImplicitAny": false,
     "noImplicitReturns": true,
-    "resolveJsonModule": false,
+    "resolveJsonModule": true,
     "declaration": true,
   },
   "include": [
     "src",
-    "config.d.ts",
+    "config.ts", "_temp/useDebounce", "_temp/useImage",
   ]
 }

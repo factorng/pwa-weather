@@ -1,0 +1,50 @@
+@import "../../shared/styles/fonts";
+@import "../../shared/styles/constants";
+
+.wrapper {
+    padding: $paddingSection;
+}
+
+.main {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.degrees {
+    font-size: 3rem;
+    margin-right: .3rem;
+}
+.conditions {
+    border-left: 1px solid black;
+    padding: 0 .3rem;
+}
+.weatherIcon {
+    margin-left: auto;
+    width: 80px;
+    height: auto;
+}
+.location {
+    font-size: 1.25rem;
+    font-weight: bold;
+}
+.additionalInfo {
+    margin: 3rem 0;
+    display: flex;
+    justify-content: space-between;
+    &Item {
+        display: flex;
+        flex-direction: column;
+        text-align: center;
+    }
+    &Data {
+        font-weight: bold;
+        margin: 0;
+    }
+    &Description {
+        margin: 0;
+        font-size: .75rem;
+    }
+}
+.icon {
+    border: 2px solid red;
+}

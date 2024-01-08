@@ -1,0 +1,13 @@
+@import "../../shared/styles/constants";
+
+.cityInput {
+  position: relative;
+}
+.button {
+  position: absolute;
+  left: 255px;
+  top: 4px;
+  border-radius: 50%;
+  border: 0;
+  background-color: $accent-color;
+}

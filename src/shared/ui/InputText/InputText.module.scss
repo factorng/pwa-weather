@@ -1,0 +1,21 @@
+@import "../../../shared/styles/constants";
+.wrapper {
+  position: relative;
+}
+.input {
+  font-size: 1.25rem;
+  font-weight: bold;
+  border: 0;
+  font-family: $font-family-main;
+  padding: 0;
+  border: 1px solid $accent-color;
+  text-transform: capitalize;
+  position: relative;
+  width: 280px;
+  box-sizing: border-box;
+  &:focus {
+    border: 1px solid black;
+    outline: none;
+  }
+  position: relative;
+}
