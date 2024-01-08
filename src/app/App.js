@@ -8,26 +8,34 @@ import { DetailedDayForecast } from '../widgets/DetailedDayForecast';
 import { ForecastTabs } from '../widgets/ForecastTabs/ForecastTabs';
 import { AirPollution } from '../widgets/AirPollution/AirPollution';
 import { PopupInstallApp } from 'widgets/PopupInstallApp';
-import { useStore } from 'store';
+import { useWeather } from '../shared/hooks/useWeather';
 import './App.scss';
 
 /**@typedef {import('../shared/types/api-types').Coordinates} Coordinates */
 /**@typedef {import('../shared/types/api-types').ApiError} ApiError */
+/**@typedef {import('../shared/types/api-types').ApiWeatherNow} ApiWeatherNow */
+/**@typedef {import('../shared/types/api-types').AirPollution} AirPollution */
 
 export function App() {
   const [todayWeather, setTodayWeather] = useState();
+  /** @type{[null | undefined | ApiWeatherNow, Function]} */
   const [forecastWeather, setForecastWeather] = useState();
+  /** @type {[null | undefined | AirPollution ,Function]}*/
   const [airPollution, setAirPollution] = useState();
   /** @type{[null | undefined | Coordinates ,Function]}*/
   const [cityCoords, setCityCoords] = useState();
   /** @type{[null | undefined | ApiError, Function]} */
   const [errorMessage, setErrorMessage] = useState();
 
-  const cityId = useStore((state) => state.cityId);
-
+  const cityId = useWeather((state) => state.cityId);
+  const setCityName = useWeather((state) => state.setCityName);
 
   useEffect(() => {
-    async function getForecasts() {
+    forecastWeather?.city.name && setCityName(forecastWeather?.city.name);
+  }, [forecastWeather]);
+
+  useEffect(() => {
+    (async () => {
       const detailedForecast = await getCityWeaterById(cityId);
       const timeForecast = await getCityForecastById(cityId);
       if ('errorMessage' in detailedForecast) {
@@ -40,15 +48,15 @@ export function App() {
       if ('errorMessage' in timeForecast) {
         setErrorMessage(timeForecast);
         return;
-      } else { setForecastWeather(timeForecast); }
-      setCityCoords(detailedForecast.coord);
-    }
-
-    getForecasts();
+      } else {
+        setForecastWeather(timeForecast);
+        setCityCoords(detailedForecast.coord);
+      }
+    })();
   }, [cityId]);
 
   useEffect(() => {
-    async function fetchData() {
+    (async () => {
       if (cityCoords) {
         const data = await getCityPollutionById(cityCoords.lon, cityCoords.lat);
         if (data && 'errorMessage' in data) {
@@ -56,27 +64,23 @@ export function App() {
           return;
         } else { setAirPollution(data); }
       }
-    }
-
-    fetchData();
+    })();
   }, [cityCoords]);
 
-  return (
+  return !errorMessage ? (
     <div className="App">
       <header className="App-header">
-        {errorMessage ? (
-          errorMessage.message
-        ) : (
-          <>
-            <DetailedDayForecast
-              apiData={todayWeather}
-            />
-            <ForecastTabs apiData={forecastWeather} />
-            <AirPollution data={airPollution} />
-            <PopupInstallApp/>
-          </>
-        )}
+        <DetailedDayForecast
+          apiData={todayWeather}
+        />
+        <ForecastTabs apiData={forecastWeather} />
+        <AirPollution data={airPollution} />
+        <PopupInstallApp />
       </header>
+    </div>
+  )  :  (
+    <div className="App">
+      {errorMessage.message}
     </div>
   );
 }

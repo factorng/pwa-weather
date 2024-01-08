@@ -19,6 +19,7 @@ export type Wind = {
   speed: number;
 };
 export type ApiWeatherNow = {
+  city: CityListItem;
   main: WeatherData;
   name: string;
   weather: Array<WeatherConditions>;
@@ -68,6 +69,8 @@ export type AirPollution = {
     pm2_5: number;
     so2: number;
   };
+  coord: Coordinates;
+  list: Array<AirPollution>;
   main: { aqi: number };
 };
 export type DailyForecastByPeriods =

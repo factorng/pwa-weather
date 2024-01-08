@@ -1,1 +1,1 @@
-export { ForecastTab } from './ForecastTab.jsx';
+export { ForecastTab } from './ForecastTab';

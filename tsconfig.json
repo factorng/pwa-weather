@@ -26,6 +26,6 @@
   },
   "include": [
     "src",
-    "config.d.ts",
+    "config.ts", "_temp/useDebounce", "_temp/useImage",
   ]
 }

@@ -1,9 +1,10 @@
+import { useMemo } from 'react';
 import { SearchHints } from '../../features/SearchHints';
 import { InputText } from '../../shared/ui/InputText';
-import { useStore } from 'store';
+import { useWeather } from '../../shared/hooks/useWeather';
 import data from '../../shared/city-list/city.json';
 import classes from './CityInput.module.scss';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 /**
  * @typedef {import ('./types').CityInputProps} Props
@@ -19,11 +20,14 @@ import { useState } from 'react';
  */
 
 export const CityInput = () => {
-  const cityList = Array.from(data);
+  const cityList = useMemo(() => Array.from(JSON.parse(JSON.stringify(data))), []);
   const [input, setInput] = useState('');
   /**@type {[null | CityList, Function]} */
   const [searchHints, setSearchHints] =  useState([]);
-  const setCityId = useStore((state) => state.setCityId);
+  const setCityId = useWeather((state) => state.setCityId);
+  const cityName = useWeather((state) => state.cityName);
+
+  useEffect(() => setInput(cityName), [cityName]);
 
   const onInputChange = (event) => {
     const searchQuery = event.target.value;
@@ -37,8 +41,12 @@ export const CityInput = () => {
   };
 
   const handleHintClick = (city) => {
-    setInput(city.name);
     setCityId(city.id);
+    setSearchHints([]);
+  };
+
+  const onResetClick = () => {
+    setInput('');
     setSearchHints([]);
   };
 
@@ -46,7 +54,7 @@ export const CityInput = () => {
     <div className={classes.cityInput}>
       <InputText value={input} testId='inputText' onChange={onInputChange}/>
       <SearchHints onHintClick={handleHintClick} hints={searchHints} />
-      <button className={classes.button}>X</button>
+      <button onClick={onResetClick} className={classes.button}>X</button>
     </div>
   );
 };

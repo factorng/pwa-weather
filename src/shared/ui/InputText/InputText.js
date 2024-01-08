@@ -6,7 +6,6 @@ import classes from './InputText.module.scss';
 
 /**
  * @function InputText
- * @description some description
  * @param {Props} props
  * @returns {JSX.Element}
  */

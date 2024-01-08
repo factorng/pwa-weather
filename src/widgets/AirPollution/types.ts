@@ -1,5 +1,5 @@
-import { ApiAirPollution } from "shared/types/api-types"
+import { AirPollution } from "shared/types/api-types"
 
 export type AirPollutionProps = {
-  data: ApiAirPollution
+  data: AirPollution | null | undefined;
 }

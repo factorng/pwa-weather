@@ -1,1 +1,1 @@
-export { Popup } from './Popup.jsx';
+export { Popup } from './Popup';

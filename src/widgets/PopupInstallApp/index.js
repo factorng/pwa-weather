@@ -1,1 +1,1 @@
-export { PopupInstallApp } from './PopupInstallApp.jsx';
+export { PopupInstallApp } from './PopupInstallApp';

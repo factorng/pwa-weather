@@ -1,1 +1,1 @@
-export { ReactPortal } from './ReactPortal.jsx';
+export { ReactPortal } from './ReactPortal';
